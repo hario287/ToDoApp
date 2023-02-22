@@ -70,7 +70,13 @@
                                                             @method('PUT')
                                                             
                                                             <!-- if文 -->
-                                                            <input type="label" class="py-4 w-20" name="status" value="{{$item->status}}">
+                                                            @if ($item->status == 1)
+                                                                <span class="p-5 text-center">完了</span>
+                                                            @else
+                                                                <span class="p-5 text-center">未完了</span>
+                                                            @endif
+
+                                                                <!-- <input type="label" class="py-4 w-20" name="status" value="{{$item->status}}"> -->
                                                             
                                                             <button type="submit"
                                                                 class="bg-emerald-500 py-4 w-20 text-white md:hover:bg-emerald-800 transition-colors">
