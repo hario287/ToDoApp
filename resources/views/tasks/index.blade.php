@@ -69,18 +69,16 @@
                                                             @csrf
                                                             @method('PUT')
                                                             
-                                                            <!-- if文 -->
                                                             @if ($item->status == 1)
-                                                                <span class="p-5 text-center">完了</span>
+                                                                (完了)
                                                             @else
-                                                                <span class="p-5 text-center">未完了</span>
+                                                                (未完了)
                                                             @endif
-
-                                                                <!-- <input type="label" class="py-4 w-20" name="status" value="{{$item->status}}"> -->
+                                                            <input type="label" class="sr-only py-4 w-20" name="status" value="{{$item->status}}">
                                                             
                                                             <button type="submit"
                                                                 class="bg-emerald-500 py-4 w-20 text-white md:hover:bg-emerald-800 transition-colors">
-                                                                完了</button>
+                                                                完了する</button>
                                                         </form>
                                                         <a href="/tasks/{{ $item->id }}/edit/"
                                                             class="inline-block text-center py-4 w-20 underline underline-offset-2 text-sky-600">

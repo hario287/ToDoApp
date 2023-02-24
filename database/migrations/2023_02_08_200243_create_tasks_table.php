@@ -16,11 +16,9 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(1);
             $table->timestamp('updated_at')->useCurrent()->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -32,7 +30,7 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('tasks', function (Blueprint $table) {
-            $table->dropColumn('user_id');
+            // $table->dropColumn('user_id');
          });      
     }
 };

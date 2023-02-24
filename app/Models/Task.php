@@ -15,9 +15,22 @@ class Task extends Model
         }
 
     // const STATUS = [
-    // 0 => [ 'label' => '未着手', 'class' => 'label-danger' ],
-    // 1 => [ 'label' => '完了', 'class' => '' ],
+    // 1 => [ 'label' => '未着手' ],
+    // 2 => [ 'label' => '完了' ],
     // ];
+
+    // public function getStatusLabelAttribute()
+    // {
+    //     // 状態値
+    //     $status = $this->attributes['status'];
+
+    //     // 定義されていなければ空文字を返す
+    //     if (!isset(self::STATUS[$status])) {
+    //         return '';
+    //     }
+
+    //     return self::STATUS[$status]['label'];
+    // }
 
     protected static function boot()
     {
