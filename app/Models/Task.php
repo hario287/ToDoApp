@@ -20,9 +20,21 @@ class Task extends Model
         {
             return $this->belongsTo(User::class);
         }
+    
     public function tag() 
         {
-            return $this->hasOne('App/Models/Tag');
+            return $this->belongsToMany('App/Models/Tag');
+        }
+    
+    public function order($select)
+        {
+            if($select == 'asc'){
+                return $this->orderBy('created_at', 'asc')->get();
+            } elseif($select == 'desc') {
+                return $this->orderBy('created_at', 'desc')->get();
+            } else {
+                return $this->all();
+            }
         }
 
     // const STATUS = [

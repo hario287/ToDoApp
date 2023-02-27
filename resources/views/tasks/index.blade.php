@@ -20,6 +20,17 @@
                         @enderror
                     </label>
  
+                    <input
+                        class="placeholder:italic placeholder:text-slate-400 block bg-white mt-4"
+                        id="tags" name="tags"
+                        class="form-control {{ $errors->has('tags') ? 'is-invalid' : '' }}"
+                        value="{{ old('tags') }}" placeholder="ここにタグを記入" type="text">
+                        @if ($errors->has('tags'))
+                            <div class="MT-3">
+                                {{ $errors->first('tags') }}
+                            </div>
+                        @endif
+
                     <button type="submit" class="mt-8 p-4 bg-slate-800 w-full shadow-lg px-2 py-1 bg-blue-400 text-lg text-white max-w-xs hover:bg-blue-500 hover:shadow-sm hover:translate-y-0.5 transform transition ">
                         追加する
                     </button>
@@ -36,6 +47,13 @@
                         </div>
                     </form>
                 </div>
+                <div class="col mt-10">
+                    {{ __('並べ替え：') }}
+                    <select name="narabi">
+                        <option value="asc">昇順</option>
+                        <option value="desc">降順</option>
+                    </select>
+                </div>
 
                 @if ($tasks->isNotEmpty())
                     <div class="mx-auto mt-10">
@@ -46,6 +64,7 @@
                                         <th scope="col"
                                             class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
                                             タスク</th>
+                                        <th>タグ</th>
                                         <th scope="col" class="relative py-3.5 pl-3">
                                             <span class="sr-only">Actions</span>
                                         </th>
@@ -58,6 +77,9 @@
                                                 <div>
                                                     {{ $item->name }}
                                                 </div>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-pill badge-info">タグ</span>
                                             </td>
                                             <td class="p-0 text-right text-sm font-medium">
                                                 <div class="flex justify-end">

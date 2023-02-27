@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Task;
 use App\Models\User;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Validator;
 
 class TaskController extends Controller
@@ -33,8 +35,20 @@ class TaskController extends Controller
 
          // 5投稿毎にページ移動
         // ->paginate(5);
-                
     }
+
+    // public function index(Request $request)
+    // {
+    //     $tasks = Auth::user()->tasks()->get();
+
+    //     $keyword = $request->input('keyword');
+    //     $query = Task::query();
+    //     if (!empty($keyword)) {
+    //         $query->where('name', 'LIKE', "%{$keyword}%");
+    //     }
+    //     $tasks = $query->orderBy($request->narabi)->get();
+    //     return view('tasks.index', compact('tasks', 'keyword'));
+    // }
   
 
     /**
@@ -72,6 +86,19 @@ class TaskController extends Controller
         Auth::user()->tasks()->save($task);
         //リダイレクト
         return redirect('/tasks');
+
+        //タグ
+        preg_match_all('/#([a-zA-z0-9０-９ぁ-んァ-ヶ亜-熙]+)/u', $request->tags, $match);
+        $tags = [];
+        foreach ($match[1] as $tag) {
+            $record = Tag::firstOrCreate(['name' => $tag]);
+            array_push($tags, $record);
+        };
+        $tags_id = [];
+        foreach ($tags as $tag) {
+            array_push($tags_id, $tag['id']);
+        };
+        $task->tags()->attach($tags_id);
     }
 
     /**
